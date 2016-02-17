@@ -13,7 +13,6 @@ class UsersController < ApplicationController
     end
     def create
         @user = User.new(user_params)
-        @user.password = params[:senha]
 
         if @user.save
             redirect_to @user
@@ -23,9 +22,6 @@ class UsersController < ApplicationController
     end
     def update
         @user = User.find(params[:id])
-        if params[:senha] 
-            @user.password = params[:senha]
-        end
 
         if @user.update(user_params)
             redirect_to @user
@@ -42,6 +38,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:nome, :login, :email, :admin, :senha)
+        params.require(:user).permit(:nome, :login, :email, :admin, :password)
     end
 end
