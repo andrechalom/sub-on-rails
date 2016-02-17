@@ -1,17 +1,7 @@
 <h1>Edição de usuário</h1>
 
 <%= form_for :user, url: user_path(@user), method: :patch do |f| %>
-
-<% if @user.errors.any? %>
-        <div id="error_explanation">
-      <h2> Erro durante atualização: </h2>
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+    <%= render 'error' =%>
 
 <p><strong>Login:</strong> <%= @user.login =%>
   </p>
