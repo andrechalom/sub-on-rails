@@ -17,5 +17,6 @@ class AuthenticationController < ApplicationController
     end
     def logout
         session[:user_id] = nil
+        redirect_to root_path and return
     end
 end

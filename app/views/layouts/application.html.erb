@@ -8,15 +8,19 @@
 </head>
 <body>
 
-<h1><%= link_to "Sub-on-Rails!", root_path =%></h1>
+<h1><%= link_to "Sub-on-Rails!", root_path %></h1>
 <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
 <% end -%>
 
 <%= yield %>
-
-<%= current_user =%>
-<br>&nbsp;<br>
-&#169; 2016 Sub-on-Rails development team
+ 
+<% if current_user then %>
+    <p>Usuário conectado: <%= current_user.login =%><br>
+    <%= link_to "Desconectar", logout_path %></p>
+<% else %>
+    <p><%=  link_to "Entrar", signin_path %></p>
+<% end %>
+<br>&#169; 2016 Sub-on-Rails development team
 </body>
 </html>
