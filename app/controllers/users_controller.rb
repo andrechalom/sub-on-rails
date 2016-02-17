@@ -1,4 +1,8 @@
+# encoding: UTF-8
 class UsersController < ApplicationController
+    # Catches RecordNotFound
+    around_filter :catch_not_found
+
     def new
         @user = User.new
     end
@@ -39,5 +43,11 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:nome, :login, :email, :admin, :password)
+    end
+
+    def catch_not_found
+          yield
+    rescue ActiveRecord::RecordNotFound
+            redirect_to users_path, flash: {notice: "Usuário não localizado"}
     end
 end
