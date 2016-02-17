@@ -1,0 +1,19 @@
+<h1>Usu&aacute;rio</h1>
+  <strong>Login:</strong>
+  <%= @user.login %>
+  </p>
+   
+  <p>
+    <strong>Nome completo:</strong>
+    <%= @user.nome %>
+    </p>
+  <p>
+    <strong>E-mail:</strong>
+    <%= @user.email %>
+    </p>
+
+  <p>
+    <strong>Admin?</strong>
+    <%= @user.admin ? "Sim" : "Não" %>
+    </p>
+    <%= link_to 'Página inicial', controller: 'welcome' =%>

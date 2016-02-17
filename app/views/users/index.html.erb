@@ -1,0 +1,18 @@
+<h1>Usuários cadastrados</h1>
+
+<table>
+      <tr>
+          <th>Login</th>
+          <th>Nome</th>
+          <th>Editar</th>
+      </tr>
+        <% @users.each do |user| %>
+              <tr>
+            <td><%= link_to user.login, user_path(user) %></td>
+            <td><%= user.nome %></td>
+          <td><%= link_to 'Editar', edit_user_path(user) %></td>
+          </tr>
+        <% end %>
+    </table>
+
+    <%= link_to 'Página inicial', controller: 'welcome' =%>

@@ -1,0 +1,42 @@
+<h1>Cadastro de usuário</h1>
+
+<%= form_for :user, url: user_path do |f| %>
+
+<% if @user.errors.any? %>
+        <div id="error_explanation">
+      <h2> Erro durante inserção: </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+  </p>
+      <p>
+    <%= f.label "Login" %><br>
+    <%= f.text_field :login %>
+  </p>
+      <p>
+    <%= f.label :"E-mail" %><br>
+    <%= f.text_field :email %>
+  </p>
+ 
+    <p>
+      <%= f.label :senha %><br>
+      <%= f.password_field :senha %>
+    </p>
+      <p>
+    <%= f.label :"Nome Completo" %><br>
+    <%= f.text_field :nome %>
+  </p>
+      <p>
+    <%= f.label :"Admin" %><br>
+    <%= f.check_box :admin %>
+  </p>
+   
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
