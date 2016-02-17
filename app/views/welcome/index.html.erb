@@ -2,4 +2,7 @@
 
 <p>Veja a lista de <%= link_to 'usuários', controller: 'users' =%>.</p>
 
-<p><%=  link_to 'Cadastro', new_user_path =%></p>
+    <p><%=  link_to 'Cadastro', new_user_path =%></p>
+    <p><%=  link_to 'Login', signin_path =%></p>
+
+    <%= render plain: @current_user.inspect =%>

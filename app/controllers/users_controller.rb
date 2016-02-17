@@ -48,6 +48,6 @@ class UsersController < ApplicationController
     def catch_not_found
           yield
     rescue ActiveRecord::RecordNotFound
-            redirect_to users_path, flash: {notice: "Usuário não localizado"}
+            redirect_to users_path, notice: "Usuário não localizado"
     end
 end

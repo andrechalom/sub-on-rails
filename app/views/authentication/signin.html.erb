@@ -1,0 +1,14 @@
+<p>Iniciar sessão</p>
+<%= form_for @user, :as => :user, :url => signin_path(@user) do |f| %>
+      <p>
+    <%= f.label 'Login:' %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label 'password:' %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.submit 'Enviar' %>
+  </p>
+<% end %>
