@@ -4,13 +4,16 @@
       <tr>
           <th>Login</th>
           <th>Nome</th>
-          <th>Editar</th>
+          <th colspan=2>Editar</th>
       </tr>
         <% @users.each do |user| %>
               <tr>
             <td><%= link_to user.login, user_path(user) %></td>
             <td><%= user.nome %></td>
           <td><%= link_to 'Editar', edit_user_path(user) %></td>
+          <td><%= link_to 'Remover', user_path(user),
+                            method: :delete,
+                            data: { confirm: 'Você tem certeza?' } %></td>
           </tr>
         <% end %>
     </table>
