@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication
-gem 'devise'
+gem 'bcrypt'
 
 
 # Use Unicorn as the app server
@@ -35,14 +35,14 @@ gem 'devise'
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
-  gem 'debugger'
+#  gem 'debugger'
 end
 
-group :development do
+#group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+#  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-end
+#  gem 'spring'
+#end
 

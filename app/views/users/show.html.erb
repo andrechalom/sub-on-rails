@@ -1,4 +1,4 @@
-<h1>Usu&aacute;rio</h1>
+<h2>Usuário</h2>
   <strong>Login:</strong>
   <%= @user.login %>
   </p>
@@ -22,4 +22,4 @@
     <strong>Admin?</strong>
     <%= @user.admin ? "Sim" : "Não" %>
     </p>
-    <%= link_to 'Página inicial', controller: 'welcome' =%>
+    <%= link_to 'Voltar', users_path =%>
