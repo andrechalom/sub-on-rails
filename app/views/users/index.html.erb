@@ -13,7 +13,7 @@
               <tr>
             <td><%= link_to user.login, user_path(user) %></td>
             <td><%= user.nome %></td>
-            <td><%= user.user_id.nil? ? "Não" : "Sim" %></td>
+            <td><%= user.authorized ? "Sim" : "Não" %></td>
             <% if current_user and (current_user.admin or current_user == user) %>
           <td><%= link_to 'Editar', edit_user_path(user) %></td>
           <% if current_user.admin %>

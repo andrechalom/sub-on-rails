@@ -14,12 +14,15 @@
 
   <p>
   <p>
-    <strong>Senha:</strong>
-    <%= @user.password_digest %>
-    </p>
+  <strong>Autorizado:</strong>
+  <% if @user.authorized %>
+     Autorizado por <%= User.find(@user.user_id).nome %>
+  <% else %>
+      Não
+  <% end %>
 
   <p>
-    <strong>Admin?</strong>
+    <strong>Administrador?</strong>
     <%= @user.admin ? "Sim" : "Não" %>
     </p>
     <%= link_to 'Voltar', users_path =%>

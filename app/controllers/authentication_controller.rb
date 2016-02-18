@@ -3,6 +3,7 @@ class AuthenticationController < ApplicationController
     layout "signin" # Essentially a copy of default layout, w/o the log in box
     def signin
         @user = User.new
+        session[:return_to] ||= request.referer
     end
     def login
         @user = User.find_by_login(params[:user][:login])
@@ -10,7 +11,7 @@ class AuthenticationController < ApplicationController
             @user = @user.authenticate(params[:user][:password])
             if @user
                 session[:user_id] = @user.id
-                redirect_to root_path and return
+                redirect_to session[:return_to] and return
             end
         end 
         # if arrives here, authentication has failed

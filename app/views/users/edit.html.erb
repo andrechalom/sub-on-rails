@@ -20,12 +20,12 @@
     <%= f.text_field :nome %>
   </p>
       <p>
-      <% if @current_user and @current_user.admin %>
-    <%= f.label "Admin" %><br>
+      <% if current_user and current_user.admin %>
     <%= f.check_box :admin %>
+    <%= f.label "Admin" %><br>
 
+    <%= f.check_box :authorized %>
     <%= f.label "Autorizado"%><br>
-    <%= f.check_box :authorize %>
 <% end %>
   </p>
    

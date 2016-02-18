@@ -28,6 +28,16 @@ class UsersController < ApplicationController
         current_user ## Ensures curent user is set
         @user = User.find(params[:id])
         if @user == @current_user or auth_admin ### LAZY IF!
+            ####### Pretty non-standard update for "authorized"
+            #### should be moved to Model?
+            if @current_user.admin
+                if @user.authorized and params[:user][:authorized] == "0" # revoking
+                    @user.user_id = nil
+                end
+                if (!@user.authorized) and (params[:user][:authorized] == "1") #authorizing
+                    @user.user_id = @current_user.id
+                end
+            end
             if @user.update(user_params)
                 redirect_to @user
             else
