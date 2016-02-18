@@ -1,5 +1,6 @@
 # encoding = UTF-8
 class AuthenticationController < ApplicationController
+    layout "signin" # Essentially a copy of default layout, w/o the log in box
     def signin
         @user = User.new
     end

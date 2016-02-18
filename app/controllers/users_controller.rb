@@ -19,30 +19,45 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
-            redirect_to @user
+            redirect_to @user, notice: "Usuário criado com sucesso. Aguarde a autorização de um administrador para usar o sistema."
         else
             render 'new'
         end
     end
     def update
+        current_user ## Ensures curent user is set
         @user = User.find(params[:id])
-
-        if @user.update(user_params)
-            redirect_to @user
-        else
-            render 'edit'
+        if @user == @current_user or auth_admin ### LAZY IF!
+            if @user.update(user_params)
+                redirect_to @user
+            else
+                render 'edit'
+            end
         end
     end
     def destroy
-        @user = User.find(params[:id])
-        @user.destroy
+        if auth_admin
+            @user = User.find(params[:id])
+            @user.destroy
 
-        redirect_to users_path
+            redirect_to users_path
+        end
     end
     private
 
     def user_params
-        params.require(:user).permit(:nome, :login, :email, :admin, :password)
+        ## Qualquer edicao proibida eh silenciosamente ignorada
+        if @user
+            if @current_user and @current_user.admin #LAZY IF
+                # Apenas admins podem dar e retirar status de admin
+                params.require(:user).permit(:nome, :email, :admin, :password)
+            else
+                # Um usuario pode trocar o proprio nome, email, password
+                params.require(:user).permit(:nome, :email, :password)
+            end
+        else # cadastrando
+            params.require(:user).permit(:nome, :login, :email, :password)
+        end
     end
 
     def catch_not_found

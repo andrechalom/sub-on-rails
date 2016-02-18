@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ApplicationController < ActionController::Base
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
@@ -12,5 +13,18 @@ class ApplicationController < ActionController::Base
     def current_user
         @current_user ||= session[:user_id] &&
             User.find_by(id: session[:user_id])
+    end
+    ### Maybe we should move this to the auth class?? But how?
+    def auth_admin
+        if auth_login # Eh necessario estar logado para ser admin
+            return true if @current_user.admin
+            redirect_to :back, notice: "Sua conta de usuário não tem os privilégios necessários para realizar essa operação." and return false
+        end
+    end
+    def auth_login
+        current_user # Makes sure @current_user is set
+        return true if @current_user
+
+        redirect_to :back, notice: "Você precisa estar logado para realizar essa ação." and return false
     end
 end

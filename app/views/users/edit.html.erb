@@ -11,7 +11,8 @@
   </p>
  
     <p>
-      <%= f.label "Senha" %><br>
+    <%= f.label "Senha" %>
+    <span>(Para manter a mesma, deixe em branco)</span><br>
       <%= f.password_field :password %>
     </p>
       <p>
@@ -19,8 +20,13 @@
     <%= f.text_field :nome %>
   </p>
       <p>
+      <% if @current_user and @current_user.admin %>
     <%= f.label "Admin" %><br>
     <%= f.check_box :admin %>
+
+    <%= f.label "Autorizado"%><br>
+    <%= f.check_box :authorize %>
+<% end %>
   </p>
    
       <p>
