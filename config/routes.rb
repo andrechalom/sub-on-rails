@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users
     get 'signin' => 'authentication#signin' #sign in form
     post 'signin' => 'authentication#login'
+    get 'authx' => 'authentication#authx'
     get 'logout' => 'authentication#logout'
 
   # The priority is based upon order of creation: first created -> highest priority.

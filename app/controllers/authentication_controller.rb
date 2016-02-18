@@ -21,4 +21,14 @@ class AuthenticationController < ApplicationController
         session[:user_id] = nil
         redirect_to root_path and return
     end
+    def authx #Some code duplication here, please rework
+        @user = User.find_by_login(params[:login])
+        if @user
+            @user = @user.authenticate(params[:password])
+            if @user and @user.authorized
+                head :ok and return
+            end
+        end 
+        head :unauthorized
+    end
 end
