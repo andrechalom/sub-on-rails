@@ -7,7 +7,7 @@ class UsersController < ApplicationController
         @user = User.new
     end
     def index
-        @users = User.all
+        @users = User.all.order :login
     end
     def show
         @user = User.find(params[:id])
