@@ -19,6 +19,8 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         if @user.save
+            # Sends a welcome mail
+            ApplicationMailer.welcomeMail(@user).deliver_later
             redirect_to @user, notice: "Usuário criado com sucesso. Aguarde a autorização de um administrador para usar o sistema."
         else
             render 'new'
