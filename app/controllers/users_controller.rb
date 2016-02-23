@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
         if @user.save
             # Sends a welcome mail
-            ApplicationMailer.welcomeMail(@user).deliver_later
+            ApplicationMailer.welcomeMail(@user).deliver_now
             redirect_to @user, notice: "Usuário criado com sucesso. Aguarde a autorização de um administrador para usar o sistema."
         else
             render 'new'
