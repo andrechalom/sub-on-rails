@@ -1,34 +1,49 @@
 # Sub on Rails
 
+**IMPORTANTE!** O Sub on Rails é um projeto em versão pré-alpha! Não instale ele (ainda!)
+
 O projeto Sub on Rails é uma pequena aplicação escrita em Ruby on Rails
 para facilitar o gerenciamento de usuários de um servidor de Apache Subversion.
 
-Ele foi escrito para gerenciar usuários no servidor da LAGE (IB/USP), mas
+Ele foi escrito para gerenciar usuários nos servidores do Instituto de Biociências (IB/USP), mas
 a instalação deve ser possível para qualquer outro servidor.
 
 # Instalação
-Antes de mais nada, é necessário instalar e configurar o Subversion, o servidor 
-Apache e uma instalação de Ruby (preferencialmente por rvm). Instale também um
-banco de dados (usamos SQLite3, mas é simples migrar para outro banco).
-Faça o download do código fonte e execute 
-`bundle install` na raíz (execute como um usuário comum 
-- se for necessário sudo o próprio bundle irá solicitar
-a senha). A seguir, compile o Passenger com
-`passenger-install-apache2-module`. Siga as instruções para configurar o Passenger.
-
-# Deploy
-
 O subversion pode usar três métodos para servir conteúdo: svnserve (protocolo svn),
 svnserve sobre túnel ssh (protocolo svn+ssh) ou Apache WebDAV (protocolos http e 
 https). Destes, apenas o protocolo WebDAV aceita autorização customizada, então
 este é o único método que usamos no Sub-on-Rails.
 
+Antes de mais nada, é necessário instalar e configurar o Subversion, o servidor 
+Apache e uma instalação de Ruby (preferencialmente por rvm). Crie um repositório svn,
+por exemplo em /var/svn/. Certifique-se de que o usuário no qual o Apache está rodando
+(como www-data) tem permissão de leitura e escrita no repositório.
+
+Instale também um
+banco de dados (a versão de desenvolvimento usa SQLite3, mas é simples migrar 
+para outro banco). Faça o download do código fonte e execute 
+`bundle install` na raíz (execute como um usuário comum 
+- se for necessário sudo o próprio bundle irá solicitar
+a senha). A seguir, compile o Passenger com
+`passenger-install-apache2-module`. Siga as instruções para configurar o Passenger.
+
+**Importante:** os arquivos do Sub on Rails devem ficar fora da área normalmente
+servida pelo Apache (como /var/www/html). Crie um diretório à parte para o Sub on Rails,
+e utilize as diretivas abaixo para permitir o acesso apenas pelo Passenger.
+
+## Configuração do Apache
+Há duas configurações importantes de serem feitas no servidor de http: habilitar o
+Passenger para servir apps escritos em Rails, e configurar o Apache para
+solicitar autenticação ao acessar o repositório svn. Siga as instruções do 
+Passenger para habilita-lo. Para configurar o acesso do repositório svn,
+inclua as seguintes diretivas:
+
 ``` 
-AddExternalAuth auth /home/chalom/git/sub-on-rails/lib/tasks/auth.rb
+AddExternalAuth auth [path para o sub-on-rails]/lib/tasks/auth.rb
 SetExternalAuthMethod auth pipe
 <Location /svn>
     DAV svn
-    SVNPath /home/chalom/svn/repos
+    SVNPath /var/svn
     AuthName "Sub-on-rails"
     AuthType Basic
     AuthBasicProvider external
@@ -36,6 +51,18 @@ SetExternalAuthMethod auth pipe
     require valid-user
 </Location>
 ```
+
+Para habilitar leitura anônima e exigir autenticação somente para escrita (commits), 
+substitua o "require valid-user" por 
+```
+<LimitExcept GET PROPFIND OPTIONS REPORT>
+    Require valid-user
+</LimitExcept>
+```
+
+## Deploy
+
+
 
 
 # Versões
