@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-
-    root 'welcome#index'
-    resources :users
-    get 'signin' => 'authentication#signin' #sign in form
-    post 'signin' => 'authentication#login'
-    get 'authx' => 'authentication#authx'
-    get 'logout' => 'authentication#logout'
+    scope(:path => '/') do ## Troque / por /subonrails para servir o app em /subonrails
+        root 'welcome#index'
+        resources :users
+        get 'signin' => 'authentication#signin' #sign in form
+        post 'signin' => 'authentication#login'
+        get 'authx' => 'authentication#authx'
+        get 'logout' => 'authentication#logout'
+    end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

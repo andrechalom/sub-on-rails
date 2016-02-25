@@ -16,8 +16,20 @@ este é o único método que usamos no Sub-on-Rails.
 
 Antes de mais nada, é necessário instalar e configurar o Subversion, o servidor 
 Apache e uma instalação de Ruby (preferencialmente por rvm). Crie um repositório svn,
-por exemplo em /var/svn/. Certifique-se de que o usuário no qual o Apache está rodando
+por exemplo em /var/svn/repos. Certifique-se de que o usuário no qual o Apache está rodando
 (como www-data) tem permissão de leitura e escrita no repositório.
+
+Os seguintes módulos de Apache são essenciais para o funcionamento do Sub on Rails:
+- auth_basic
+- authnz_external
+- dav
+- dav_svn
+
+
+Os seguintes módulos de Apache podem ser úteis:
+- rewrite
+- proxy
+- proxy_http
 
 Instale também um
 banco de dados (a versão de desenvolvimento usa SQLite3, mas é simples migrar 
@@ -29,7 +41,8 @@ a senha). A seguir, compile o Passenger com
 
 **Importante:** os arquivos do Sub on Rails devem ficar fora da área normalmente
 servida pelo Apache (como /var/www/html). Crie um diretório à parte para o Sub on Rails,
-e utilize as diretivas abaixo para permitir o acesso apenas pelo Passenger.
+e utilize as diretivas abaixo para permitir o acesso apenas pelo Passenger. Por exemplo,
+você pode clonar este projeto como /var/svn/sub-on-rails
 
 ## Configuração do Apache
 Há duas configurações importantes de serem feitas no servidor de http: habilitar o
@@ -39,11 +52,11 @@ Passenger para habilita-lo. Para configurar o acesso do repositório svn,
 inclua as seguintes diretivas:
 
 ``` 
-AddExternalAuth auth [path para o sub-on-rails]/lib/tasks/auth.rb
+AddExternalAuth auth /var/svn/sub-on-rails/lib/tasks/auth.rb
 SetExternalAuthMethod auth pipe
 <Location /svn>
     DAV svn
-    SVNPath /var/svn
+    SVNPath /var/svn/repos
     AuthName "Sub-on-rails"
     AuthType Basic
     AuthBasicProvider external
@@ -60,11 +73,35 @@ substitua o "require valid-user" por
 </LimitExcept>
 ```
 
+O Passenger precisa de um VirtualHost próprio, então você pode criar algo como
+```
+<VirtualHost *:4000>
+ServerName lhe.ib.usp.br
+DocumentRoot /var/svn/sub-on-rails/public
+</VirtualHost>
+```
+
+E, se desejar, pode habilitar o proxy na porta 80 para redirecionar o subonrails
+de forma transparente para a porta 4000:
+
+```
+RewriteEngine on
+RewriteRule ^/subonrails$ http://localhost:4000/subonrails [P]
+RewriteRule ^/subonrails/(.*) http://localhost:4000/subonrails/$1 [P]
+```
+
+Se você alterar a configuração de proxy ou a porta na qual o passenger está conectado,
+lembre-se de alterar o routes.rb e a URI em lib/tasks/auth.rb!
+
 ## Deploy
+Depois de todas as configurações acima, o deploy do Sub on Rails é bastante simples:
+configure o arquivo de routes.rb com o prefixo escolhido (por exemplo, /subonrails);
+configure o serviço de e-mail em config/environments/production (use o de desenvolvimento
+como base); e adicione as variáveis de ambiente necessárias (senha de e-mail e secret_key).
 
-
-
+A instalação inicial não vem com nenhum usuário cadastrado, então pode ser necessário
+adicionar usuários pela linha de comando (rails c).
 
 # Versões
 
-Testado com Ruby 1.9.3p484, Rails 4.2.5.1, svn 1.8.8, sqlite 3.8.2.
+Testado com Ruby 2.2.1, Rails 4.2.5.1, svn 1.8.8, sqlite 3.8.2.
