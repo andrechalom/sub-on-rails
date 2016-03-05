@@ -99,6 +99,8 @@ configure o arquivo de routes.rb com o prefixo escolhido (por exemplo, /subonrai
 configure o serviço de e-mail em config/environments/production (use o de desenvolvimento
 como base); e adicione as variáveis de ambiente necessárias (senha de e-mail e secret_key).
 
+Finalmente, crie o banco de dados do ambiente de produção (algo como `RAILS_ENV=production rake db:setup`).
+
 A instalação inicial não vem com nenhum usuário cadastrado, então pode ser necessário
 adicionar usuários pela linha de comando (rails c).
 
