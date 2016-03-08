@@ -11,3 +11,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Don't version databases
+db/*.sqlite3
