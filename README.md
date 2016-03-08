@@ -79,8 +79,10 @@ substitua o "require valid-user" por
 O Passenger precisa de um VirtualHost próprio, então você pode criar algo como
 ```
 <VirtualHost *:4000>
-ServerName myserver.example.com
-DocumentRoot /var/svn/sub-on-rails/public
+  ServerName myserver.example.com
+  SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
+  SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
+  DocumentRoot /var/svn/sub-on-rails/public
 </VirtualHost>
 ```
 
@@ -91,6 +93,7 @@ de forma transparente para a porta 4000:
 RewriteEngine on
 RewriteRule ^/subonrails$ http://localhost:4000/subonrails [P]
 RewriteRule ^/subonrails/(.*) http://localhost:4000/subonrails/$1 [P]
+RewriteRule ^/assets/(.*) http://localhost:4000/assets/$1 [P]
 ```
 
 Se você alterar a configuração de proxy ou a porta na qual o passenger está conectado,
@@ -107,11 +110,11 @@ definidos no arquivo `db/seeds.rb`. Antes de prosseguir, edite esse arquivo para
 o seu usuário administrador.
 
 Finalmente, crie o banco de dados do ambiente de produção, e compile os recursos (css/js) com
-`
+```
 export RAILS_ENV=production 
 rake db:setup
 rake assets:precompile
-`
+```
 
 # Versões
 
