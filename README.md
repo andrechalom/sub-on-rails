@@ -8,12 +8,13 @@ para facilitar o gerenciamento de usuários de um servidor de Apache Subversion.
 Ele foi escrito para gerenciar usuários nos servidores do Instituto de Biociências (IB/USP), mas
 a instalação deve ser possível para qualquer outro servidor.
 
-# Instalação
+# Requisitos
 O subversion pode usar três métodos para servir conteúdo: svnserve (protocolo svn),
 svnserve sobre túnel ssh (protocolo svn+ssh) ou Apache WebDAV (protocolos http e 
 https). Destes, apenas o protocolo WebDAV aceita autorização customizada, então
 este é o único método que usamos no Sub-on-Rails.
 
+# Instalação
 Antes de mais nada, é necessário instalar e configurar o Subversion, o servidor 
 Apache e uma instalação de Ruby (preferencialmente por rvm). Crie um repositório svn,
 por exemplo em /var/svn/repos. Certifique-se de que o usuário no qual o Apache está rodando
@@ -24,7 +25,6 @@ Os seguintes módulos de Apache são essenciais para o funcionamento do Sub on R
 - authnz_external
 - dav
 - dav_svn
-
 
 Os seguintes módulos de Apache podem ser úteis:
 - rewrite
@@ -61,9 +61,12 @@ SetExternalAuthMethod auth pipe
     AuthType Basic
     AuthBasicProvider external
     AuthExternal auth
-    require valid-user
+    Require valid-user
 </Location>
 ```
+
+Lembre-se de trocar os caminhos para os arquivos no exemplo acima se você não instalou
+o repositório / aplicativo onde sugerido.
 
 Para habilitar leitura anônima e exigir autenticação somente para escrita (commits), 
 substitua o "require valid-user" por 
@@ -76,7 +79,7 @@ substitua o "require valid-user" por
 O Passenger precisa de um VirtualHost próprio, então você pode criar algo como
 ```
 <VirtualHost *:4000>
-ServerName lhe.ib.usp.br
+ServerName myserver.example.com
 DocumentRoot /var/svn/sub-on-rails/public
 </VirtualHost>
 ```
@@ -99,10 +102,16 @@ configure o arquivo de routes.rb com o prefixo escolhido (por exemplo, /subonrai
 configure o serviço de e-mail em config/environments/production (use o de desenvolvimento
 como base); e adicione as variáveis de ambiente necessárias (senha de e-mail e secret_key).
 
-Finalmente, crie o banco de dados do ambiente de produção (algo como `RAILS_ENV=production rake db:setup`).
+A instalação inicial contém a instrução para gerar um usuário "admin", com nome, e-mail e senha
+definidos no arquivo `db/seeds.rb`. Antes de prosseguir, edite esse arquivo para customizar
+o seu usuário administrador.
 
-A instalação inicial não vem com nenhum usuário cadastrado, então pode ser necessário
-adicionar usuários pela linha de comando (rails c).
+Finalmente, crie o banco de dados do ambiente de produção, e compile os recursos (css/js) com
+`
+export RAILS_ENV=production 
+rake db:setup
+rake assets:precompile
+`
 
 # Versões
 
