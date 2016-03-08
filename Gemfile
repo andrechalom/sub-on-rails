@@ -24,8 +24,8 @@ gem 'bcrypt'
 # Integration with Apache webserver
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
 
-# Bootstrap CSS+js integration
-gem "twitter-bootstrap-rails"
+# Use Unicorn as the app server
+# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
