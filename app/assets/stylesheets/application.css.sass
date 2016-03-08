@@ -1,26 +1,43 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
-body
+html, body
+  min-height: 100%
+  height: 100%
   color: #3A3839
-
-/*h1,h2,h3
-  color: #00908C */
+  font-family: 'Raleway', sans-serif
 
 a
   color: #00494D
   &:hover
     color: #A3B800
+    text-decoration: none
+
+#main-container
+  min-height: 100%
+  position: relative
+
+#main-content
+  overflow: auto
+  padding-bottom: 60px
 
 .footer
   position: absolute
   bottom: 0
-  width: 100%
   height: 60px
 
-.user
-  float: right
+.btn-success
+  background-color: #00908C
+  border-color: #42B3AE
+  &:hover
+    background-color: #A3B800
+    border-color: #C3D800
 
-.lightbg
-  background-color: #CEE4E2
-  padding: 7px
+.in-alert
+  margin-left: 7px
+
+.in-btn
+  margin-left: 8px
+
+.header
+  margin-top: 20px

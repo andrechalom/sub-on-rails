@@ -20,7 +20,11 @@ class UsersController < ApplicationController
 
         if @user.save
             # Sends a welcome mail
-            ApplicationMailer.welcomeMail(@user).deliver_now
+            begin
+                ApplicationMailer.welcomeMail(@user).deliver_now
+            rescue Errno::ECONNREFUSED
+                flash.alert = "Houve um erro ao enviar um e-mail" 
+            end
             redirect_to @user, notice: "Usuário criado com sucesso. Aguarde a autorização de um administrador para usar o sistema."
         else
             render 'new'
@@ -73,8 +77,8 @@ class UsersController < ApplicationController
     end
 
     def catch_not_found
-          yield
+        yield
     rescue ActiveRecord::RecordNotFound
-            redirect_to users_path, notice: "Usuário não localizado"
+        redirect_to users_path, alert: "Usuário não localizado."
     end
 end

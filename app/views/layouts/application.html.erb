@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SubOnRails</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>Sub on Rails</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Raleway:400,700' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <div class="container" id="main-container">
-    <div class="row"> 
+    <div class="row" id="main-content"> 
         <div class="col-md-6 col-md-offset-3"> 
-            <div class="row text-center">
+            <div class="row text-center header">
                 <%= link_to root_path do %>
                     <%= image_tag "index.png" %>
                 <% end %>
             </div>
 
             <div class="content"> 
-                <!-- Gambiarra: só checamos flash notices, pq soh usamos notices. Precisa ser melhorado -->
+                <!-- Gambiarra: só checamos flash notices/alerts, pq soh usamos isso. Precisa ser melhorado -->
                 <% if flash[:notice] %>
+                    <div class="alert alert-success">
+                        <span class="glyphicon glyphicon-ok-sign"></span>
+                        <%= content_tag :span, flash[:notice], class: "in-alert" %>
+                    </div>
+                <% end %>
+                <% if flash[:alert] %>
                     <div class="alert alert-danger">
-                        <% flash.each do |name, msg| -%>
-                            <%= content_tag :div, msg, class: name %>
-                        <% end -%>
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <%= content_tag :span, flash[:alert], class: "in-alert" %>
                     </div>
                 <% end %>
 
@@ -33,24 +39,22 @@
 
             <div class="user">
                 <% if current_user then %>
-                    <p>Usuário conectado: <%= current_user.login =%><br>
-                    <%= link_to "Desconectar", logout_path %></p>
+                    <p>Usuário: <%= current_user.login =%><br>
+                    <%= link_to "Sair", logout_path %></p>
                 <% else %>
                     <p><%=  link_to "Entrar", signin_path %></p>
                 <% end %>
             </div> <!-- user -->
         </div>
     </div>
-</div> <!-- main container -->
-<footer class="footer">
-    <div class="container">
-        <div class="col-md-6 col-md-offset-3"> 
+    <div class="row">
+    <div class="footer col-md-6 col-md-offset-3"> 
             Sub-on-rails 0.0.1<br/>
             <%=  link_to "https://github.com/andrechalom/sub-on-rails" do %>
                 (&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
             <% end %>
-        </div>
+        </div> <!-- footer -->
     </div>
-</footer>
+</div> <!-- main container -->
 </body>
 </html>

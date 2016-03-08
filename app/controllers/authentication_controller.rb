@@ -15,7 +15,7 @@ class AuthenticationController < ApplicationController
             end
         end 
         # if arrives here, authentication has failed
-        redirect_to root_path, notice: "Usuário ou senha inválidos"
+        redirect_to root_path, alert: "Usuário ou senha inválidos"
     end
     def logout
         session[:user_id] = nil

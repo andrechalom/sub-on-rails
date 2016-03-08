@@ -18,13 +18,13 @@ class ApplicationController < ActionController::Base
     def auth_admin
         if auth_login # Eh necessario estar logado para ser admin
             return true if @current_user.admin
-            redirect_to :back, notice: "Sua conta de usuário não tem os privilégios necessários para realizar essa operação." and return false
+            redirect_to :back, alert: "Sua conta de usuário não tem os privilégios necessários para realizar essa operação." and return false
         end
     end
     def auth_login
         current_user # Makes sure @current_user is set
         return true if @current_user
 
-        redirect_to :back, notice: "Você precisa estar logado para realizar essa ação." and return false
+        redirect_to :back, alert: "Você precisa estar logado para realizar essa ação." and return false
     end
 end

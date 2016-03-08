@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    scope(:path => '/') do ## Troque / por /subonrails para servir o app em /subonrails
+    scope(:path => '/subonrails') do ## Troque / por /subonrails para servir o app em /subonrails
         root 'welcome#index'
         resources :users
         get 'signin' => 'authentication#signin' #sign in form

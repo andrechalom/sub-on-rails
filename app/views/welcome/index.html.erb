@@ -3,4 +3,7 @@
 
 <p>Veja aqui a lista de <%= link_to 'usuários', controller: 'users' =%> cadastrados.</p>
 
-    <p><%=  link_to 'Cadastro', new_user_path =%></p>
+<p><%=  link_to new_user_path, class: 'btn btn-success' do =%>
+<span class="glyphicon glyphicon-plus"></span><span class="in-btn">Cadastre-se</span>
+   <% end %>
+</p>
