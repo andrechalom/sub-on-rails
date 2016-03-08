@@ -17,26 +17,34 @@
                 <% end %>
             </div>
 
+            <div class="content"> 
+                <% flash.each do |name, msg| -%>
+                    <%= content_tag :div, msg, class: name %>
+                <% end -%>
 
-    <div class="content"> 
-<% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-<% end -%>
+                <%= yield %>
 
-<%= yield %>
+            </div> <!-- content -->
 
+            <% if current_user then %>
+                <p>Usuário conectado: <%= current_user.login =%><br>
+                <%= link_to "Desconectar", logout_path %></p>
+            <% else %>
+                <p><%=  link_to "Entrar", signin_path %></p>
+            <% end %>
 
-    </div> <!-- content -->
-<% if current_user then %>
-    <p>Usuário conectado: <%= current_user.login =%><br>
-    <%= link_to "Desconectar", logout_path %></p>
-<% else %>
-    <p><%=  link_to "Entrar", signin_path %></p>
-<% end %>
-<br>(&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
-
-</div>
-</div>
+        </div>
+    </div>
 </div> <!-- main container -->
+<footer class="footer">
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3"> 
+            Sub-on-rails 0.0.1<br/>
+            <%=  link_to "https://github.com/andrechalom/sub-on-rails" do %>
+                (&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
+            <% end %>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

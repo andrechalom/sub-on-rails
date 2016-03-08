@@ -1,4 +1,5 @@
-# Sub on Rails
+! [Sub-on-Rails] (public/sub_logo.png?raw=true)
+
 
 **IMPORTANTE!** O Sub on Rails é um projeto em versão pré-alpha! Não instale ele (ainda!)
 
