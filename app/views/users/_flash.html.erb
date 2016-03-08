@@ -1,0 +1,24 @@
+<!-- Gambiarra: só checamos flash notices/alerts, pq soh usamos isso. Precisa ser melhorado -->
+<% if flash[:notice] %>
+    <div class="alert alert-success">
+        <span class="glyphicon glyphicon-ok-sign"></span>
+        <%= content_tag :span, flash[:notice], class: "in-alert" %>
+    </div>
+<% end %>
+<% if flash[:alert] %>
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <%= content_tag :span, flash[:alert], class: "in-alert" %>
+    </div>
+<% end %>
+<% if defined? @user and @user.errors.any? %>
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <strong>Ocorreram os seguintes erros: </strong>
+        <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

@@ -81,10 +81,13 @@ O Passenger precisa de um VirtualHost próprio, então você pode criar algo com
 <VirtualHost *:4000>
   ServerName myserver.example.com
   SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
-  SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
+  SetEnv EMAIL_PASSWORD <sua senha de email aqui>
   DocumentRoot /var/svn/sub-on-rails/public
 </VirtualHost>
 ```
+
+Lembre-se de criar um segredo para o SECRET_KEY_BASE (com `rake secret`) e 
+de editar suas configurações de e-mail no arquivo config/environments/production.rb.
 
 E, se desejar, pode habilitar o proxy na porta 80 para redirecionar o subonrails
 de forma transparente para a porta 4000:
