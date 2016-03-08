@@ -4,6 +4,8 @@ gem 'rails', '4.2.5.1'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -23,9 +25,6 @@ gem 'bcrypt'
 
 # Integration with Apache webserver
 gem "passenger", ">= 5.0.25", require: "phusion_passenger/rack_handler"
-
-# Use Unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -8,13 +8,22 @@
 </head>
 <body>
 
-<h1><%= link_to "Sub-on-Rails!", root_path %></h1>
+<div class="container-fluid" id="main-container">
+    <div class="jumbotron">
+        <%= link_to root_path do %>
+            <%= image_tag "index.png" %>
+        <% end %>
+    </div> <!-- jumbotron -->
+
+    <div class="content"> 
 <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
 <% end -%>
 
 <%= yield %>
- 
+
+
+    </div> <!-- content -->
 <% if current_user then %>
     <p>Usuário conectado: <%= current_user.login =%><br>
     <%= link_to "Desconectar", logout_path %></p>
@@ -22,5 +31,7 @@
     <p><%=  link_to "Entrar", signin_path %></p>
 <% end %>
 <br>(&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
+
+</div> <!-- main container -->
 </body>
 </html>

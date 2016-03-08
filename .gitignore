@@ -14,3 +14,6 @@
 
 # Don't version databases
 db/*.sqlite3
+
+# Public assets need to be compiled
+public/assets/
