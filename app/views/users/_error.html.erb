@@ -1,6 +1,6 @@
 <% if @user.errors.any? %>
-        <div id="error_explanation">
-      <h2>Ocorreram os seguintes erros: </h2>
+        <div class="alert alert-danger">
+      <strong>Ocorreram os seguintes erros: </strong>
       <ul>
         <% @user.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>

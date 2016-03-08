@@ -8,13 +8,22 @@
 </head>
 <body>
 
-<h1><%= link_to "Sub-on-Rails!", root_path %></h1>
-<% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-<% end -%>
+<div class="container" id="main-container">
+    <div class="row"> 
+        <div class="col-md-6 col-md-offset-3"> 
+            <div class="row text-center">
+                <%= link_to root_path do %>
+                    <%= image_tag "index.png" %>
+                <% end %>
+            </div>
 
-<%= yield %>
- 
-<br>(&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
+            <div class="content lightbg"> 
+
+                <%= yield %>
+
+            </div> <!-- content -->
+        </div>
+    </div>
+</div> <!-- main container -->
 </body>
 </html>

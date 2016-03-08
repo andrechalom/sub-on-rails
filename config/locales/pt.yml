@@ -1,0 +1,21 @@
+pt:
+  activerecord:
+    models:
+      user: "Usuário"
+    attributes:
+      user:
+        password: "Senha"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "não pode estar em branco."
+            login:
+              blank: "não pode estar em branco."
+              taken: "já está em uso."
+              too_short: "deve ter no mínimo 4 caracteres."
+            email:
+              blank: "não pode estar em branco."
+              taken: "já está em uso."
+              invalid: "inválido."

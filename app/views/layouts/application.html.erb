@@ -18,21 +18,27 @@
             </div>
 
             <div class="content"> 
-                <% flash.each do |name, msg| -%>
-                    <%= content_tag :div, msg, class: name %>
-                <% end -%>
+                <!-- Gambiarra: só checamos flash notices, pq soh usamos notices. Precisa ser melhorado -->
+                <% if flash[:notice] %>
+                    <div class="alert alert-danger">
+                        <% flash.each do |name, msg| -%>
+                            <%= content_tag :div, msg, class: name %>
+                        <% end -%>
+                    </div>
+                <% end %>
 
                 <%= yield %>
 
             </div> <!-- content -->
 
-            <% if current_user then %>
-                <p>Usuário conectado: <%= current_user.login =%><br>
-                <%= link_to "Desconectar", logout_path %></p>
-            <% else %>
-                <p><%=  link_to "Entrar", signin_path %></p>
-            <% end %>
-
+            <div class="user">
+                <% if current_user then %>
+                    <p>Usuário conectado: <%= current_user.login =%><br>
+                    <%= link_to "Desconectar", logout_path %></p>
+                <% else %>
+                    <p><%=  link_to "Entrar", signin_path %></p>
+                <% end %>
+            </div> <!-- user -->
         </div>
     </div>
 </div> <!-- main container -->
