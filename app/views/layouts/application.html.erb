@@ -8,12 +8,15 @@
 </head>
 <body>
 
-<div class="container-fluid" id="main-container">
-    <div class="jumbotron">
-        <%= link_to root_path do %>
-            <%= image_tag "index.png" %>
-        <% end %>
-    </div> <!-- jumbotron -->
+<div class="container" id="main-container">
+    <div class="row"> 
+        <div class="col-md-6 col-md-offset-3"> 
+            <div class="row text-center">
+                <%= link_to root_path do %>
+                    <%= image_tag "index.png" %>
+                <% end %>
+            </div>
+
 
     <div class="content"> 
 <% flash.each do |name, msg| -%>
@@ -32,6 +35,8 @@
 <% end %>
 <br>(&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
 
+</div>
+</div>
 </div> <!-- main container -->
 </body>
 </html>
