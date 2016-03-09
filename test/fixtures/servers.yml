@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  singleton_guard: false
+  repo_url: MyString
+  has_mail: false
+
+two:
+  singleton_guard: false
+  repo_url: MyString
+  has_mail: false
