@@ -5,6 +5,11 @@ pt:
     attributes:
       user:
         password: "Senha"
+    models:
+      server: "Servidor"
+    attributes:
+      server:
+        repo_url: "URL do repositório"
     errors:
       models:
         user:
@@ -20,3 +25,7 @@ pt:
               blank: "não pode estar em branco."
               taken: "já está em uso."
               invalid: "inválido."
+        server:
+          attributes:
+            repo_url:
+              invalid: "deve ser um URL contendo protocolo (http:// ou https://)"

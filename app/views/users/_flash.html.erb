@@ -22,3 +22,14 @@
         </ul>
     </div>
 <% end %>
+<% if defined? @server and @server.errors.any? %>
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <strong>Ocorreram os seguintes erros: </strong>
+        <ul>
+            <% @server.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

@@ -6,8 +6,10 @@ Rails.application.routes.draw do
         post 'signin' => 'authentication#login'
         get 'authx' => 'authentication#authx'
         get 'logout' => 'authentication#logout'
-    end
-
+        get 'server' => 'server#edit'
+        patch 'server' => 'server#update'
+        
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

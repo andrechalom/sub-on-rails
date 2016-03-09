@@ -29,8 +29,8 @@
             <div class="navbar navbar-default">
                 <%= link_to "Início", root_path, class: 'btn btn-default' %>
                 <%= link_to "Usuários", users_path, class: 'btn btn-default' %>
-                <%= link_to "Repositório", root_path, class: 'btn btn-default' %>
-                <%= link_to "Administração", root_path, class: 'btn btn-default' %>
+                <%= link_to "Repositório", Server.instance.repo_url, class: 'btn btn-default' %>
+                <%= link_to "Administração", server_path, class: 'btn btn-default' %>
                 <p class="navbar-right">
                 <% if current_user then %>
                     <%= current_user.login =%>&nbsp;

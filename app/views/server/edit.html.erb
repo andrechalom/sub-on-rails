@@ -1,0 +1,19 @@
+<h2>Parâmetros do servidor</h2>
+<%= render 'flash' %>
+
+<%= form_for :server, url: server_path, method: :patch, html: {class: 'form-horizontal'} do |f| %>
+
+    <p><%= f.label :repo_url, 'URL do repositório' %><br>
+       <span class="small">Vai ser usada na página principal e e-mails</span<br>
+       <%= f.text_field :repo_url, class: 'form-control' =%>
+  </p>
+      <p>
+      <%= f.check_box :has_mail %>
+      <%= f.label "E-mail habilitado" %><br>
+      <span class="small">Marque aqui para habilitar envio de e-mails</span>
+      </p>
+ 
+      <p>
+        <%= f.submit "Alterar", class: 'btn btn-default' %>
+      </p>
+<% end %>
