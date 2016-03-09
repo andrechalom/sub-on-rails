@@ -1,5 +1,12 @@
 <h2>Usuários cadastrados</h2>
 <%= render 'flash' =%>
+<p> Estes são os usuários <em>cadastrados</em> no sistema. Note que apenas os usuários <em>autorizados</em>
+podem ter acesso pleno ao repositório. Se você tiver alguma dúvida sobre sua autorização, entre em contato
+com algum administrador.</p>
+<p><%=  link_to new_user_path, class: 'btn btn-default' do =%>
+<span class="glyphicon glyphicon-plus"></span><span class="in-btn">Novo usuário</span>
+   <% end %>
+</p>
 
 <table class="table">
       <tr>
@@ -26,4 +33,3 @@
           </tr>
         <% end %>
     </table>
-        <%= link_to "Cadastro", new_user_path %>

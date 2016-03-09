@@ -2,9 +2,33 @@
 <%= render 'flash' =%>
 <p>O Sub on Rails é um projeto de gerenciamento de usu&aacute;rios de <a href="http://subversion.apache.org">Apache Subversion</a>.</p>
 
-<p>Veja aqui a lista de <%= link_to 'usuários', controller: 'users' =%> cadastrados.</p>
+<h3>O que é Subversion?</h3>
+O subversion, ou svn, é um sistema de gerenciamento de versões. Ele serve para registrar a história e permitir
+controle sobre versões sucessivas de um conjunto de arquivos. O conceito de versionamento está  
+associado ao desenvolvimento de software, mas ele também é importante na escrita de textos colaborativos. 
 
-<p><%=  link_to new_user_path, class: 'btn btn-success' do =%>
+<h3>Como eu faço para me cadastrar?</h3>
+<p>Para se cadastrar neste site, clique no botão abaixo e preencha o formulário. Você poderá usar o
+repositório assim que um administrador autorizar o seu acesso:</p>
+<p><%=  link_to new_user_path, class: 'btn btn-default' do =%>
 <span class="glyphicon glyphicon-plus"></span><span class="in-btn">Cadastre-se</span>
    <% end %>
 </p>
+
+<h3>Como eu uso o Subversion?</h3>
+A maneira mais simples de usar o subversion é através de um cliente; dependendo do sistema operacional que você usa,
+você pode instalar o 
+<a href="http://tortoisesvn.tigris.org/">Tortoise</a> (Windows), 
+<a href="http://rabbitvcs.org/">Rabbit</a> (Linux), 
+<a href="http://www.lachoseinteractive.net/en/community/subversion/svnx/features/">svnX</a> ou <a href="http://scplugin.tigris.org/">SCPlugin</a> (Mac).
+<p>Você também pode usar a interface de linha de comando. Se você está em Linux, digite "apt-get install subversion" 
+(ou equivalente) e a seguir "svn help" para começar a usar.</p>
+
+
+<h3>Quem pode acessar o repositório?</h3>
+<p>Apenas usuários <em>cadastrados</em> e <em>autorizados</em> podem ver ou alterar os arquivos. Todos os
+usuários autorizados podem visualizar arquivos de outros usuários - isso permite a colaboração entre
+os usuários!</p>
+
+<p>Veja aqui a <%= link_to 'lista de usuários', controller: 'users' =%> cadastrados.</p>
+

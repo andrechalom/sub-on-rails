@@ -5,6 +5,7 @@
   </p>
       <p>
     <%= f.label "Login" %><br>
+    <span class="small">(apenas letras, números, ponto ou traço, sem espaços ou caracteres especiais)</span><br>
     <%= f.text_field :login, class: 'form-control' %>
   </p>
       <p>
@@ -25,4 +26,3 @@
       </p>
   <% end %>
 
-  <%= link_to 'Voltar', users_path =%>

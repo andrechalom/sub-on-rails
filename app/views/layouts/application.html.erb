@@ -22,22 +22,29 @@
                 <%= yield %>
             </div> <!-- content -->
 
-            <div class="user">
-                <% if current_user then %>
-                    <p>Usuário: <%= current_user.login =%><br>
-                    <%= link_to "Sair", logout_path %></p>
-                <% else %>
-                    <p><%=  link_to "Entrar", signin_path %></p>
-                <% end %>
-            </div> <!-- user -->
         </div>
     </div>
     <div class="row">
     <div class="footer col-md-6 col-md-offset-3"> 
-            Sub-on-rails 0.0.1<br/>
+            <div class="navbar navbar-default">
+                <%= link_to "Início", root_path, class: 'btn btn-default' %>
+                <%= link_to "Usuários", users_path, class: 'btn btn-default' %>
+                <%= link_to "Repositório", root_path, class: 'btn btn-default' %>
+                <%= link_to "Administração", root_path, class: 'btn btn-default' %>
+                <p class="navbar-right">
+                <% if current_user then %>
+                    <%= current_user.login =%>&nbsp;
+                    <%= link_to "Sair", logout_path, class: 'btn btn-danger' %>
+                <% else %>
+                    <%=  link_to "Entrar", signin_path, class: 'btn btn-default' %>
+                <% end %>
+                </p>
+            </div> <!-- navbar -->
+            <p>Sub-on-rails 0.0.1 - 
             <%=  link_to "https://github.com/andrechalom/sub-on-rails" do %>
                 (&#596;) 2016 Time de desenvolvimento Sub-on-Rails.
             <% end %>
+            </p>
         </div> <!-- footer -->
     </div>
 </div> <!-- main container -->
