@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     end
     def update
         current_user ## Ensures curent user is set
+        authorized = nil
         @user = User.find(params[:id])
         if @user == @current_user or auth_admin ### LAZY IF!
             ####### Pretty non-standard update for "authorized"
@@ -42,13 +43,16 @@ class UsersController < ApplicationController
                 end
                 if (!@user.authorized) and (params[:user][:authorized] == "1") #authorizing
                     @user.user_id = @current_user.id
+                    authorized = true
                 end
             end
             if @user.update(user_params)
-                begin
-                    ApplicationMailer.authMail(@user).deliver_now
-                rescue Errno::ECONNREFUSED
-                    flash.alert = "Houve um erro ao enviar um e-mail" 
+                if authorized
+                    begin
+                        ApplicationMailer.authMail(@user).deliver_now
+                    rescue Errno::ECONNREFUSED
+                        flash.alert = "Houve um erro ao enviar um e-mail" 
+                    end
                 end
                 redirect_to @user
             else
