@@ -45,6 +45,11 @@ class UsersController < ApplicationController
                 end
             end
             if @user.update(user_params)
+                begin
+                    ApplicationMailer.authMail(@user).deliver_now
+                rescue Errno::ECONNREFUSED
+                    flash.alert = "Houve um erro ao enviar um e-mail" 
+                end
                 redirect_to @user
             else
                 render 'edit'
