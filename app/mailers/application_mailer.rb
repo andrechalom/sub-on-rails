@@ -4,6 +4,8 @@ class ApplicationMailer < ActionMailer::Base
 
   def welcomeMail (user)
       @user = user
-      mail to: @user.email, subject: "Boas vindas!"
+      if Server.instance.has_mail
+          mail to: @user.email, subject: "Boas vindas!"
+      end
   end
 end

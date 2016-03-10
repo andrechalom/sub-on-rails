@@ -103,10 +103,11 @@ Se você alterar a configuração de proxy ou a porta na qual o passenger está 
 lembre-se de alterar o routes.rb e a URI em lib/tasks/auth.rb!
 
 ## Deploy
-Depois de todas as configurações acima, o deploy do Sub on Rails é bastante simples:
+Depois de todas as configurações acima, o deploy do Sub on Rails é razoavelmente simples:
 configure o arquivo de routes.rb com o prefixo escolhido (por exemplo, /subonrails);
 configure o serviço de e-mail em config/environments/production (use o de desenvolvimento
 como base); e adicione as variáveis de ambiente necessárias (senha de e-mail e secret_key).
+Ainda, configure o host para envio de e-mails em config/environments/production.
 
 A instalação inicial contém a instrução para gerar um usuário "admin", com nome, e-mail e senha
 definidos no arquivo `db/seeds.rb`. Antes de prosseguir, edite esse arquivo para customizar
