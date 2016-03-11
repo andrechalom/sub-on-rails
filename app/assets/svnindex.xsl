@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+
+  Modificado a partir do template distribuido com o subversion 1.9.3
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <xsl:output method="html"/>
+    <xsl:variable name="subonrails" select="'http://localhost/subonrails'" />
+    <xsl:variable name="repos" select="'LAGE IB/USP'" />
+  <xsl:template match="*"/>
+  <xsl:template match="svn">
+
+    <html>
+      <head>
+        <title>
+            Sub on Rails: <xsl:value-of select="index/@path"/>
+        </title>
+        <link rel="stylesheet" type="text/css" href="/svnindex.css"/>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:400,700"/>
+      </head>
+      <body>
+          <div id="main-container">
+        <div class="svn">
+          <xsl:apply-templates/>
+        </div>
+        <div class="footer">
+            <p><xsl:text>Para fazer uma cópia deste diretório nesta revisão, copie o endereço da barra do navegador para o seu cliente de SVN.</xsl:text></p>
+            <p><xsl:text>Voltar para o </xsl:text>
+                <xsl:element name="a">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="$subonrails"/>
+                    </xsl:attribute>
+                    <xsl:text>Sub on Rails</xsl:text>
+                </xsl:element>
+                <xsl:text>. svn versão </xsl:text>
+                <xsl:value-of select="@version"/>
+            </p>
+        </div>
+    </div>
+    </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="index">
+      <div class="rev"><h1>
+        <xsl:text>Repositório </xsl:text> <xsl:value-of select="$repos"/>
+        <xsl:if test="@rev">
+            <xsl:text> &#x2014; </xsl:text>
+            <xsl:text>Revisão </xsl:text>
+            <xsl:if test="@rev &gt; 0">
+                <xsl:element name="a">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat('?p=', @rev - 1)"/>
+                    </xsl:attribute>
+                    <xsl:text>&lt;</xsl:text>
+                </xsl:element>
+            </xsl:if>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="@rev"/>
+            <xsl:text> </xsl:text>
+                <xsl:element name="a">
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="concat('?p=', @rev + 1)"/>
+                    </xsl:attribute>
+                    <xsl:text>&gt;</xsl:text>
+                </xsl:element>
+        </xsl:if>
+</h1></div>
+    <div class="path">
+        <xsl:value-of select="@path"/>
+    </div>
+    <xsl:apply-templates select="updir"/>
+    <xsl:apply-templates select="dir"/>
+    <xsl:apply-templates select="file"/>
+  </xsl:template>
+
+  <xsl:template match="updir">
+    <div class="updir">
+      <xsl:text>[</xsl:text>
+      <xsl:element name="a">
+          <xsl:attribute name="href">../?p=<xsl:value-of select="/svn/index/@rev"/></xsl:attribute>
+          <xsl:text>Acima</xsl:text>
+      </xsl:element>
+      <xsl:text>]</xsl:text>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="dir">
+    <div class="dir">
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:value-of select="@href"/>
+        </xsl:attribute>
+        <xsl:value-of select="@name"/>
+        <xsl:text>/</xsl:text>
+      </xsl:element>
+    </div>
+  </xsl:template>
+
+  <xsl:template match="file">
+    <div class="file">
+      <xsl:element name="a">
+        <xsl:attribute name="href">
+          <xsl:value-of select="@href"/>
+        </xsl:attribute>
+        <xsl:value-of select="@name"/>
+      </xsl:element>
+    </div>
+  </xsl:template>
+
+</xsl:stylesheet>
