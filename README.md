@@ -63,6 +63,8 @@ SetExternalAuthMethod auth pipe
     AuthType Basic
     AuthBasicProvider external
     AuthExternal auth
+    # Essa diretiva DESLIGA path-based authorization, o que deixa tudo 10x mais rapido
+    SVNPathAuthz off
     Require valid-user
 </Location>
 ```
