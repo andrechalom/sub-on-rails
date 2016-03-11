@@ -15,23 +15,24 @@ ActiveRecord::Schema.define(version: 20160309001243) do
 
   create_table "servers", force: :cascade do |t|
     t.boolean  "singleton_guard"
-    t.string   "repo_url"
+    t.string   "repo_url",        limit: 255
     t.boolean  "has_mail"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login"
-    t.string   "email"
-    t.string   "nome"
+    t.string   "login",           limit: 255
+    t.string   "email",           limit: 255
+    t.string   "nome",            limit: 255
     t.boolean  "admin"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "user_id"
-    t.string   "password_digest"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "user_id",         limit: 4
+    t.string   "password_digest", limit: 255
   end
 
-  add_index "users", ["user_id"], name: "index_users_on_user_id"
+  add_index "users", ["user_id"], name: "index_users_on_user_id", using: :btree
 
+  add_foreign_key "users", "users"
 end

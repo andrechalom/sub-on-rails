@@ -31,9 +31,11 @@ Os seguintes módulos de Apache podem ser úteis:
 - proxy
 - proxy_http
 
-Instale também um
-banco de dados (a versão de desenvolvimento usa SQLite3, mas é simples migrar 
-para outro banco). Faça o download do código fonte e execute 
+Instale também um banco de dados (a versão de desenvolvimento usa MySQL, mas é simples migrar 
+para outro banco). Crie um usuário para o subonrails nesse banco de dados, de preferência
+já com acesso ao database subonrails (ou forneça o password de root durante o setup).
+
+Faça o download do código fonte e execute 
 `bundle install` na raíz (execute como um usuário comum 
 - se for necessário sudo o próprio bundle irá solicitar
 a senha). A seguir, compile o Passenger com
@@ -82,6 +84,7 @@ O Passenger precisa de um VirtualHost próprio, então você pode criar algo com
   ServerName myserver.example.com
   SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
   SetEnv EMAIL_PASSWORD <sua senha de email aqui>
+  SetEnv MYSQL_PASSWORD <sua senha de bd aqui>
   DocumentRoot /var/svn/sub-on-rails/public
 </VirtualHost>
 ```

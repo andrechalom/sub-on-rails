@@ -67,6 +67,8 @@ class UsersController < ApplicationController
 
             redirect_to users_path
         end
+    rescue ActiveRecord::StatementInvalid
+        redirect_to users_path, alert: "Impossível deletar. Certifique-se de que o usuário não é responsável por algum outro usuário"
     end
     private
 
