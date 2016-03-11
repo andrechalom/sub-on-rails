@@ -10,26 +10,27 @@ com algum administrador.</p>
 
 <table class="table">
       <tr>
+          <th>Ações</th>
           <th>Login</th>
           <th>Nome</th>
           <th>Autorizado</th>
-          <% if current_user %>
-              <th colspan=2>Editar</th>
-          <%end %>
       </tr>
-        <% @users.each do |user| %>
+          <% @users.each do |user| %>
               <tr>
-            <td><%= link_to user.login, user_path(user) %></td>
-            <td><%= user.nome %></td>
-            <td><%= user.authorized ? "Sim" : "Não" %></td>
-            <% if current_user and (current_user.admin or current_user == user) %>
-          <td><%= link_to 'Editar', edit_user_path(user) %></td>
-          <% if current_user.admin %>
-          <td><%= link_to 'Remover', user_path(user),
-                            method: :delete,
-                            data: { confirm: 'Você tem certeza?' } %></td>
-                    <%end%>
-                    <% end %>
-          </tr>
+                  <td>
+                      <% if current_user and (current_user.admin or current_user == user) %>
+                          <%= link_to edit_user_path(user) do%><span class="glyphicon glyphicon-cog"></span><%end%>
+                      <% end %>
+                      <% if current_user and current_user.admin %>
+                          <%= link_to user_path(user), method: :delete,
+                              data: { confirm: 'Você tem certeza?' } do %>
+                              <span class="glyphicon glyphicon-remove"></span>
+                          <%end%>
+                      <%end%>
+                  </td>
+                  <td><%= link_to user.login, user_path(user) %></td>
+                  <td><%= user.nome %></td>
+                  <td><%= user.authorized ? "Sim" : "Não" %></td>
+              </tr>
         <% end %>
     </table>
