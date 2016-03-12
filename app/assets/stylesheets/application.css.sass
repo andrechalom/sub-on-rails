@@ -1,11 +1,16 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
+/*
+ * require "welcome"
+ */
 
 html, body
   min-height: 100%
   height: 100%
   color: #3A3839
   font-family: 'Raleway', sans-serif
+  margin: 0
+  padding: 0
 
 a
   color: #00908C
@@ -54,3 +59,39 @@ a
 
 .jumbotron
   margin-top: 20px
+
+
+////// SVN index directives
+.svn 
+  overflow: auto
+  width: 70%
+  margin-left: auto
+  margin-right: auto
+  padding-bottom: 120px
+
+.svn-footer 
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  height: 110px
+  width: 70%
+  margin-left: auto
+  margin-right: auto
+  padding: 5px
+  border-top: 1px solid
+  border-color: #00494D
+
+.path, .dir, .updir, .file
+  margin: 3px
+  padding: 3px 6px
+
+.path 
+  background: #00908C
+  color: #FFFFFF
+  font-size: 120%
+  border-radius: 4px
+
+.updir, .file, .dir
+  margin-left: 3em
+

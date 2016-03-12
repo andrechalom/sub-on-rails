@@ -63,6 +63,7 @@ SetExternalAuthMethod auth pipe
     AuthType Basic
     AuthBasicProvider external
     AuthExternal auth
+    SVNIndexXSLT "/subonrails/svnindex.xsl"
     # Essa diretiva DESLIGA path-based authorization, o que deixa tudo 10x mais rapido
     SVNPathAuthz off
     Require valid-user
@@ -127,4 +128,4 @@ rake assets:precompile
 
 # Versões
 
-Testado com Ruby 2.2.1, Rails 4.2.5.1, svn 1.8.8, sqlite 3.8.2.
+Testado com Ruby 2.2.1, Rails 4.2.5.1, svn 1.8.8, MySQL 5.6.28

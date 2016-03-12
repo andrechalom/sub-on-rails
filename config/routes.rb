@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
     scope(:path => '/subonrails') do ## Troque / por /subonrails para servir o app em /subonrails
         root 'welcome#index'
+        get 'svnindex' => 'welcome#svnindex'
         resources :users
         get 'signin' => 'authentication#signin' #sign in form
         post 'signin' => 'authentication#login'
