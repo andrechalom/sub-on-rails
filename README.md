@@ -1,6 +1,8 @@
 ![Sub on rails](public/sub_logo.png?raw=true)
 
-**IMPORTANTE!** O Sub on Rails é um projeto em versão pré-alpha! Não instale ele (ainda!)
+**IMPORTANTE!** O Sub on Rails é um projeto em versão alpha! Use-o por sua conta e risco.
+
+A versão atual do Sub on Rails é a 0.0.3.
 
 O projeto Sub on Rails é uma pequena aplicação escrita em Ruby on Rails
 para facilitar o gerenciamento de usuários de um servidor de Apache Subversion.
