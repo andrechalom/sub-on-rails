@@ -2,7 +2,7 @@
 
 **IMPORTANTE!** O Sub on Rails é um projeto em versão alpha! Use-o por sua conta e risco.
 
-A versão atual do Sub on Rails é a 0.0.3.
+A versão atual do Sub on Rails é a 0.0.4.
 
 O projeto Sub on Rails é uma pequena aplicação escrita em Ruby on Rails
 para facilitar o gerenciamento de usuários de um servidor de Apache Subversion.
@@ -38,10 +38,9 @@ para outro banco). Crie um usuário para o subonrails nesse banco de dados, de p
 já com acesso ao database subonrails (ou forneça o password de root durante o setup).
 
 Faça o download do código fonte e execute 
-`bundle install` na raíz (execute como um usuário comum 
-- se for necessário sudo o próprio bundle irá solicitar
-a senha). A seguir, compile o Passenger com
-`passenger-install-apache2-module`. Siga as instruções para configurar o Passenger.
+`bundle install` na raíz (execute como um usuário comum - se for necessário sudo o próprio bundle irá solicitar
+a senha). A seguir, instale o [Phusion Passenger](https://www.phusionpassenger.com) juntamente com o módulo
+de Apache.
 
 **Importante:** os arquivos do Sub on Rails devem ficar fora da área normalmente
 servida pelo Apache (como /var/www/html). Crie um diretório à parte para o Sub on Rails,
@@ -86,14 +85,17 @@ substitua o "require valid-user" por
 O Passenger precisa de um VirtualHost próprio, então você pode criar algo como
 ```
 <VirtualHost *:4000>
-  ServerName myserver.example.com
-  SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
-  SetEnv EMAIL_PASSWORD <sua senha de email aqui>
-  SetEnv MYSQL_PASSWORD <sua senha de bd aqui>
-  DocumentRoot /var/svn/sub-on-rails/public
+    ServerName myserver.example.com
+    SetEnv SECRET_KEY_BASE <sua chave secreta aqui>
+    SetEnv EMAIL_PASSWORD <sua senha de email aqui>
+    SetEnv MYSQL_PASSWORD <sua senha de bd aqui>
+    DocumentRoot /var/svn/sub-on-rails/public
+    PassengerRuby /path-to-ruby
 </VirtualHost>
 ```
 
+Aqui, /path-to-ruby é o caminho usado para a versão de Ruby instalada (verifique o tutorial
+do Passenger para detalhes). 
 Lembre-se de criar um segredo para o SECRET_KEY_BASE (com `rake secret`) e 
 de editar suas configurações de e-mail no arquivo config/environments/production.rb.
 
@@ -116,6 +118,8 @@ configure o arquivo de routes.rb com o prefixo escolhido (por exemplo, /subonrai
 configure o serviço de e-mail em config/environments/production (use o de desenvolvimento
 como base); e adicione as variáveis de ambiente necessárias (senha de e-mail e secret_key).
 Ainda, configure o host para envio de e-mails em config/environments/production.
+Finalmente, atualize o arquivo app/views/welcome/svnindex.xsl.erb para gerar um link de volta
+para a sua instalação sub-on-rails.
 
 A instalação inicial contém a instrução para gerar um usuário "admin", com nome, e-mail e senha
 definidos no arquivo `db/seeds.rb`. Antes de prosseguir, edite esse arquivo para customizar
@@ -130,4 +134,4 @@ rake assets:precompile
 
 # Versões
 
-Testado com Ruby 2.2.1, Rails 4.2.5.1, svn 1.8.8, MySQL 5.6.28
+Testado com Ruby 2.4.1, Rails 4.2.10, svn 1.6.7, MySQL 14.14 Distrib 5.5.59
